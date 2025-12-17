@@ -127,6 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     updateCartUI();
     setupCartToggle();
+    animateOnScroll();
 });
 
 function renderProductDetails() {
@@ -155,17 +156,40 @@ function renderProductDetails() {
                 <p class="text-gray-600 mb-6">${product.descripcion}</p>
 
                 <div class="flex items-center mb-6">
-                    <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded-l">-</button>
-                    <span class="px-4 py-1 border-t border-b">1</span>
-                    <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded-r">+</button>
+                    <button id="quantity-decrease" class="bg-gray-200 text-gray-700 px-3 py-1 rounded-l">-</button>
+                    <span id="quantity-value" class="px-4 py-1 border-t border-b">1</span>
+                    <button id="quantity-increase" class="bg-gray-200 text-gray-700 px-3 py-1 rounded-r">+</button>
                 </div>
 
-                <button onclick="addToCart('${product.nombre}', ${product.precio}, '${imageUrl}')" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-md">
+                <button id="add-to-cart-btn" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-md">
                     Añadir al carrito
                 </button>
             </div>
         </div>
     `;
+
+    const decreaseBtn = document.getElementById('quantity-decrease');
+    const increaseBtn = document.getElementById('quantity-increase');
+    const quantitySpan = document.getElementById('quantity-value');
+    const addToCartBtn = document.getElementById('add-to-cart-btn');
+
+    let quantity = 1;
+
+    decreaseBtn.addEventListener('click', () => {
+        if (quantity > 1) {
+            quantity--;
+            quantitySpan.textContent = quantity;
+        }
+    });
+
+    increaseBtn.addEventListener('click', () => {
+        quantity++;
+        quantitySpan.textContent = quantity;
+    });
+
+    addToCartBtn.addEventListener('click', () => {
+        addToCart(product.nombre, product.precio, imageUrl, quantity);
+    });
 }
 
 function renderProducts() {
@@ -239,13 +263,13 @@ function closeCart() {
     if (cartOverlay) cartOverlay.classList.add('hidden');
 }
 
-function addToCart(name, price, image) {
+function addToCart(name, price, image, quantity = 1) {
     const existingItem = cart.find(item => item.name === name);
 
     if (existingItem) {
-        existingItem.quantity++;
+        existingItem.quantity += quantity;
     } else {
-        cart.push({ name, price, image, quantity: 1 });
+        cart.push({ name, price, image, quantity });
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -287,7 +311,7 @@ function updateCartUI() {
                                     <button onclick="updateQuantity(${index}, 1)" class="px-2 py-1 text-gray-500 hover:text-gray-700">+</button>
                                 </div>
                                 <div class="flex">
-                                    <button onclick="removeFromCart(${index})" class="font-medium text-green-600 hover:text-green-500">Remove</button>
+                                    <button onclick="removeFromCart(${index})" class="font-medium text-green-600 hover:text-green-500">Eliminar</button>
                                 </div>
                             </div>
                         </div>
@@ -328,4 +352,33 @@ function showNotification(message, icon, bgColor) {
         notification.classList.replace('animate__fadeInRight', 'animate__fadeOutRight');
         notification.addEventListener('animationend', () => notification.remove());
     }, 2000);
+}
+
+function checkout() {
+    let message = 'Hola! Me gustaría pedir los siguientes productos:\n\n';
+    cart.forEach(item => {
+        message += `${item.name} - Cantidad: ${item.quantity} - Precio: $${(item.price * item.quantity).toFixed(2)}\n`;
+    });
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    message += `\nTotal: $${total.toFixed(2)}`;
+
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=5491123456789&text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+}
+
+function animateOnScroll() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.remove('animate__fadeOut');
+                entry.target.classList.add('animate__fadeInUp');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    document.querySelectorAll('.animate__animated').forEach(el => {
+        observer.observe(el);
+    });
 }
