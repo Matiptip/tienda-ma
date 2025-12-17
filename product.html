@@ -1,0 +1,192 @@
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f7;
+            scroll-behavior: smooth;
+        }
+
+        .title-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .btn-hover {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-hover::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: -100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .btn-hover:hover::after {
+            left: 100%;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #4ade80;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+      <!-- Navegación -->
+      <nav class="bg-white shadow-sm sticky top-0 z-50 animate__animated animate__fadeInDown">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-leaf text-green-600 text-2xl mr-2 animate__animated animate__pulse animate__infinite animate__slower"></i>
+                        <span class="text-xl font-bold text-green-700 title-font">Dulce Bienestar Castelar</span>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="index.html" class="nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Inicio</a>
+                        <a href="index.html#categories" class="nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Productos</a>
+                        <a href="index.html#videos" class="nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Videos</a>
+                        <a href="index.html#testimonials" class="nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Nosotros</a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <button id="cart-button" class="relative p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-transform hover:scale-110">
+                        <span class="sr-only">Ver carrito</span>
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-green-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center animate__animated animate__bounceIn">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="product-detail-container" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    </div>
+
+    <!-- Carrito de Compras -->
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 max-w-md w-full bg-white shadow-xl transform transition-transform duration-300 ease-in-out translate-x-full z-50">
+        <div class="flex flex-col h-full">
+            <div class="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
+                <div class="flex items-start justify-between">
+                    <h2 class="text-lg font-medium text-gray-900">Tu Carrito</h2>
+                    <button id="close-cart" class="ml-4 p-2 text-gray-400 hover:text-gray-500 transition-colors">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+
+                <div class="mt-8">
+                    <div id="cart-items" class="flow-root">
+                        <div class="text-center py-12">
+                            <i class="fas fa-shopping-cart text-4xl text-gray-300 mb-4"></i>
+                            <p class="text-gray-500">Tu carrito está vacío</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-200 py-6 px-4 sm:px-6">
+                <div class="flex justify-between text-base font-medium text-gray-900 mb-4">
+                    <p>Subtotal</p>
+                    <p id="cart-total">$0.00</p>
+                </div>
+                <p class="mt-0.5 text-sm text-gray-500">Envío e impuestos calculados al finalizar.</p>
+                <div class="mt-6">
+                    <button onclick="checkout()" class="btn-hover w-full bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-md transition-colors">
+                        Finalizar Compra
+                    </button>
+                </div>
+                <div class="mt-6 flex justify-center text-sm text-center text-gray-500">
+                    <p>
+                        o <button id="continue-shopping" class="text-green-600 font-medium hover:text-green-800 transition-colors">Seguir Comprando</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="cart-overlay" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 z-40"></div>
+
+    <!-- Pie de Página -->
+    <footer class="bg-gray-800 text-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-sm font-semibold uppercase tracking-wider">Comprar</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Todos los Productos</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Novedades</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Más Vendidos</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Ofertas Especiales</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold uppercase tracking-wider">Nosotros</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Nuestra Historia</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Certificaciones</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Sostenibilidad</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Prensa</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold uppercase tracking-wider">Ayuda</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Preguntas Frecuentes</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Envíos</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Devoluciones</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Contáctanos</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold uppercase tracking-wider">Conéctate</h3>
+                    <div class="mt-4 flex space-x-6">
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                    <div class="mt-6">
+                        <p class="text-xs text-gray-400">
+                            &copy; 2025 Dulce Bienestar Castelar. Todos los derechos reservados.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+   <script src="js.js"></script>
+</body>

@@ -1,0 +1,569 @@
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Dulce Bienestar Castelar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f7;
+            scroll-behavior: smooth;
+        }
+        
+        .title-font {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(154,205,50,0.9) 0%, rgba(106,168,79,0.9) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-gradient::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .product-card {
+            transition: all 0.3s ease;
+            transform: translateY(0);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* Fixed the z-index issue */
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 60%, rgba(255,255,255,0.8) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0; /* Changed from 1 to 0 */
+            pointer-events: none; /* Allows clicks to pass through */
+        }
+        
+        .product-card:hover::before {
+            opacity: 1;
+        }
+        
+        /* Ensure buttons are clickable */
+        .product-card button {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .category-card {
+            transition: all 0.3s ease;
+            transform: scale(1);
+        }
+        
+        .category-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-card {
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-hover {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-hover::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: -100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .btn-hover:hover::after {
+            left: 100%;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #4ade80;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .rotate-in {
+            animation: rotateIn 0.5s ease-out;
+        }
+        
+        @keyframes rotateIn {
+            from { transform: rotate(-5deg) scale(0.9); opacity: 0; }
+            to { transform: rotate(0deg) scale(1); opacity: 1; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .zoom-on-hover {
+            transition: transform 0.3s ease;
+        }
+        
+        .zoom-on-hover:hover {
+            transform: scale(1.05);
+        }
+        
+        .cart-notification {
+            animation: slideIn 0.5s forwards, fadeOut 0.5s forwards 2s;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        
+        .product-badge {
+            animation: pulse 1.5s infinite;
+        }
+
+        #product-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        @media (min-width: 640px) {
+            #product-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            #product-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+    </style>
+</head>
+<body>
+      <!-- Navegación -->
+      <nav class="bg-white shadow-sm sticky top-0 z-50 animate__animated animate__fadeInDown">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-leaf text-green-600 text-2xl mr-2 animate__animated animate__pulse animate__infinite animate__slower"></i>
+                        <span class="text-xl font-bold text-green-700 title-font">Dulce Bienestar Castelar</span>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="#" class="nav-link border-green-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Inicio</a>
+                        <a href="#categories" class="nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Productos</a>
+                        <a href="#videos" class="nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Videos</a>
+                        <a href="#testimonials" class="nav-link border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Nosotros</a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <button id="cart-button" class="relative p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-transform hover:scale-110">
+                        <span class="sr-only">Ver carrito</span>
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-green-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center animate__animated animate__bounceIn">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Hero -->
+    <div class="hero-gradient text-white">
+        <div class="max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8 hero-content">
+            <div class="text-center animate__animated animate__fadeIn">
+                <h1 class="title-font text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
+                    Vive sin gluten <span class="underline decoration-yellow-300">sin sacrificar el sabor</span>
+                </h1>
+                <p class="mt-6 text-xl max-w-3xl mx-auto">
+                    Descubre nuestra selección artesanal de productos sin gluten que no comprometen el sabor ni la calidad.
+                    Perfecto para celíacos y amantes de la comida saludable.
+                </p>
+                <div class="mt-10 flex justify-center space-x-4">
+                    <a href="#categories" class="btn-hover inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-green-700 bg-white hover:bg-gray-50">
+                        Comprar Ahora
+                    </a>
+                    <a href="#videos" class="btn-hover inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-green-800 bg-opacity-60 hover:bg-opacity-70">
+                        Saber Más
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Categorías Destacadas -->
+    <div id="categories" class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="title-font text-3xl font-bold text-gray-900 mb-8 text-center animate__animated animate__fadeIn">Nuestras Categorías Sin Gluten</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="category-card bg-green-50 rounded-lg p-6 text-center hover:bg-green-100 transition-colors cursor-pointer animate__animated animate__fadeInUp">
+                    <div class="mx-auto h-16 w-16 flex items-center justify-center rounded-full bg-green-100 text-green-600 mb-4">
+                        <i class="fas fa-bread-slice text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900">Panadería</h3>
+                    <p class="mt-1 text-sm text-gray-500">Panes y pastelería fresca</p>
+                </div>
+                <div class="category-card bg-green-50 rounded-lg p-6 text-center hover:bg-green-100 transition-colors cursor-pointer animate__animated animate__fadeInUp animate__delay-1s">
+                    <div class="mx-auto h-16 w-16 flex items-center justify-center rounded-full bg-green-100 text-green-600 mb-4">
+                        <i class="fas fa-pizza-slice text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900">Pastas</h3>
+                    <p class="mt-1 text-sm text-gray-500">Favoritos italianos</p>
+                </div>
+                <div class="category-card bg-green-50 rounded-lg p-6 text-center hover:bg-green-100 transition-colors cursor-pointer animate__animated animate__fadeInUp animate__delay-2s">
+                    <div class="mx-auto h-16 w-16 flex items-center justify-center rounded-full bg-green-100 text-green-600 mb-4">
+                        <i class="fas fa-cookie text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900">Snacks</h3>
+                    <p class="mt-1 text-sm text-gray-500">Bocadillos para llevar</p>
+                </div>
+                <div class="category-card bg-green-50 rounded-lg p-6 text-center hover:bg-green-100 transition-colors cursor-pointer animate__animated animate__fadeInUp animate__delay-3s">
+                    <div class="mx-auto h-16 w-16 flex items-center justify-center rounded-full bg-green-100 text-green-600 mb-4">
+                        <i class="fas fa-mortar-pestle text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900">Harinas</h3>
+                    <p class="mt-1 text-sm text-gray-500">Para hornear en casa</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Productos Destacados -->
+    <div id="products" class="bg-gray-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="title-font text-3xl font-bold text-gray-900 animate__animated animate__fadeIn">Productos Destacados</h2>
+                <a href="#" class="text-green-600 hover:text-green-800 font-medium animate__animated animate__fadeIn">Ver todos los productos →</a>
+            </div>
+            
+            <div id="product-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Products will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de Videos -->
+    <div id="videos" class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="title-font text-3xl font-bold text-center text-gray-900 mb-12 animate__animated animate__fadeIn">Videos Recomendados</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Video 1 -->
+                <div class="bg-green-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 animate__animated animate__fadeIn">
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="block">
+                        <div class="relative h-48">
+                            <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" alt="Video 1" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                                <i class="fab fa-youtube text-white text-5xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Video Title 1</h3>
+                            <p class="text-sm">A short description of the video.</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Video 2 -->
+                <div class="bg-green-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 animate__animated animate__fadeIn animate__delay-1s">
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="block">
+                        <div class="relative h-48">
+                            <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" alt="Video 2" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                                <i class="fab fa-youtube text-white text-5xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Video Title 2</h3>
+                            <p class="text-sm">A short description of the video.</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Video 3 -->
+                <div class="bg-green-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 animate__animated animate__fadeIn animate__delay-2s">
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="block">
+                        <div class="relative h-48">
+                            <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg" alt="Video 3" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                                <i class="fab fa-youtube text-white text-5xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Video Title 3</h3>
+                            <p class="text-sm">A short description of the video.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonios -->
+    <div id="testimonials" class="bg-green-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="title-font text-3xl font-bold text-center text-gray-900 mb-12 animate__animated animate__fadeIn">Lo Que Dicen Nuestros Clientes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="testimonial-card bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 animate__animated animate__fadeIn">
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0">
+                            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-gray-900">Laura Martínez</p>
+                            <div class="flex space-x-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"Como persona celíaca, encontrar pan sin gluten sabroso era un desafío. ¡El pan de masa madre de Dulce Bienestar Castelar cambió todo!"</p>
+                </div>
+                
+                <div class="testimonial-card bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 animate__animated animate__fadeIn animate__delay-1s">
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0">
+                            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-gray-900">Carlos González</p>
+                            <div class="flex space-x-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"¡La pasta de quinoa es increíble! Mi familia que no es celíaca ni nota la diferencia. Definitivamente pediré más."</p>
+                </div>
+                
+                <div class="testimonial-card bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 animate__animated animate__fadeIn animate__delay-2s">
+                    <div class="flex items-center mb-4">
+                        <div class="flex-shrink-0">
+                            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-gray-900">Ana Rodríguez</p>
+                            <div class="flex space-x-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star-half-alt text-yellow-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"No soy celíaca pero elijo comer sin gluten por salud. La calidad y sabor de estos productos son excepcionales."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Boletín -->
+    <div class="bg-green-700 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="md:w-1/2 mb-6 md:mb-0 animate__animated animate__fadeInLeft">
+                    <h2 class="text-2xl font-bold text-white title-font">Únete a Nuestra Comunidad</h2>
+                    <p class="mt-2 text-green-100">Recibe ofertas exclusivas, recetas y consejos de salud en tu correo.</p>
+                </div>
+                <div class="md:w-1/2 animate__animated animate__fadeInRight">
+                    <form class="flex">
+                        <input type="email" placeholder="Tu dirección de correo" class="px-4 py-3 w-full rounded-l-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <button type="submit" class="btn-hover bg-green-900 hover:bg-green-800 text-white px-6 py-3 rounded-r-md font-medium transition-colors">
+                            Suscribirse
+                        </button>
+                    </form>
+                    <p class="mt-2 text-xs text-green-200">Respetamos tu privacidad. Cancela cuando quieras.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Carrito de Compras -->
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 max-w-md w-full bg-white shadow-xl transform transition-transform duration-300 ease-in-out translate-x-full z-50">
+        <div class="flex flex-col h-full">
+            <div class="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
+                <div class="flex items-start justify-between">
+                    <h2 class="text-lg font-medium text-gray-900">Tu Carrito</h2>
+                    <button id="close-cart" class="ml-4 p-2 text-gray-400 hover:text-gray-500 transition-colors">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+
+                <div class="mt-8">
+                    <div id="cart-items" class="flow-root">
+                        <div class="text-center py-12">
+                            <i class="fas fa-shopping-cart text-4xl text-gray-300 mb-4"></i>
+                            <p class="text-gray-500">Tu carrito está vacío</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-200 py-6 px-4 sm:px-6">
+                <div class="flex justify-between text-base font-medium text-gray-900 mb-4">
+                    <p>Subtotal</p>
+                    <p id="cart-total">$0.00</p>
+                </div>
+                <p class="mt-0.5 text-sm text-gray-500">Envío e impuestos calculados al finalizar.</p>
+                <div class="mt-6">
+                    <button onclick="checkout()" class="btn-hover w-full bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-md transition-colors">
+                        Finalizar Compra
+                    </button>
+                </div>
+                <div class="mt-6 flex justify-center text-sm text-center text-gray-500">
+                    <p>
+                        o <button id="continue-shopping" class="text-green-600 font-medium hover:text-green-800 transition-colors">Seguir Comprando</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="cart-overlay" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 z-40"></div>
+
+    <!-- Pie de Página -->
+    <footer class="bg-gray-800 text-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-sm font-semibold uppercase tracking-wider">Comprar</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Todos los Productos</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Novedades</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Más Vendidos</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Ofertas Especiales</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold uppercase tracking-wider">Nosotros</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Nuestra Historia</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Certificaciones</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Sostenibilidad</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Prensa</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold uppercase tracking-wider">Ayuda</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Preguntas Frecuentes</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Envíos</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Devoluciones</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Contáctanos</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold uppercase tracking-wider">Conéctate</h3>
+                    <div class="mt-4 flex space-x-6">
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                    <div class="mt-6">
+                        <p class="text-xs text-gray-400">
+                            &copy; 2025 Dulce Bienestar Castelar. Todos los derechos reservados.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+   <script src="js.js"></script>
+</body>
