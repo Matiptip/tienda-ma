@@ -202,6 +202,24 @@
         .product-badge {
             animation: pulse 1.5s infinite;
         }
+
+        #product-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        @media (min-width: 640px) {
+            #product-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            #product-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
         
     </style>
     <script>
@@ -363,117 +381,8 @@
                 <a href="#" class="text-green-600 hover:text-green-800 font-medium animate__animated animate__fadeIn">Ver todos los productos →</a>
             </div>
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Producto 1 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-sm product-card animate__animated animate__fadeIn">
-                    <div class="relative pb-2/3 h-48 bg-gray-100">
-                        <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pan sin gluten" class="absolute h-full w-full object-cover">
-                        <div class="absolute top-2 right-2 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded-full product-badge">NUEVO</div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-lg font-medium text-gray-900">Pan de Masa Madre GF</h3>
-                            <p class="text-lg font-bold text-green-700">$7.99</p>
-                        </div>
-                        <p class="mt-1 text-sm text-gray-500">Certificado sin gluten</p>
-                        <div class="mt-4 flex items-center">
-                            <div class="flex items-center">
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star-half-alt text-yellow-400"></i>
-                                <span class="text-gray-500 text-xs ml-1">(48)</span>
-                            </div>
-                        </div>
-                        <button onclick="addToCart('Pan de Masa Madre GF', 7.99, 'https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')" class="btn-hover mt-4 w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-md transition-colors">
-                            Añadir al Carrito
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Producto 2 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-sm product-card animate__animated animate__fadeIn">
-                    <div class="relative pb-2/3 h-48 bg-gray-100">
-                        <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pan sin gluten" class="absolute h-full w-full object-cover">
-                        <div class="absolute top-2 right-2 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded-full product-badge">NUEVO</div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-lg font-medium text-gray-900">Pan de Masa Madre GF</h3>
-                            <p class="text-lg font-bold text-green-700">$7.99</p>
-                        </div>
-                        <p class="mt-1 text-sm text-gray-500">Certificado sin gluten</p>
-                        <div class="mt-4 flex items-center">
-                            <div class="flex items-center">
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star-half-alt text-yellow-400"></i>
-                                <span class="text-gray-500 text-xs ml-1">(48)</span>
-                            </div>
-                        </div>
-                        <button onclick="addToCart('Pan de Masa Madre GF', 7.99, 'https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')" class="btn-hover mt-4 w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-md transition-colors">
-                            Añadir al Carrito
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Producto 3 -->
-               <div class="bg-white rounded-lg overflow-hidden shadow-sm product-card animate__animated animate__fadeIn">
-                    <div class="relative pb-2/3 h-48 bg-gray-100">
-                        <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Pan sin gluten" class="absolute h-full w-full object-cover">
-                        <div class="absolute top-2 right-2 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded-full product-badge">NUEVO</div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-lg font-medium text-gray-900">Pan de Masa Madre GF</h3>
-                            <p class="text-lg font-bold text-green-700">$7.99</p>
-                        </div>
-                        <p class="mt-1 text-sm text-gray-500">Certificado sin gluten</p>
-                        <div class="mt-4 flex items-center">
-                            <div class="flex items-center">
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star-half-alt text-yellow-400"></i>
-                                <span class="text-gray-500 text-xs ml-1">(48)</span>
-                            </div>
-                        </div>
-                        <button onclick="addToCart('Pan de Masa Madre GF', 7.99, 'https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')" class="btn-hover mt-4 w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-md transition-colors">
-                            Añadir al Carrito
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Producto 4 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-sm product-card animate__animated animate__fadeIn animate__delay-3s">
-                    <div class="relative pb-2/3 h-48 bg-gray-100">
-                        <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Harina sin gluten" class="absolute h-full w-full object-cover">
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-lg font-medium text-gray-900">Harina de Almendras</h3>
-                            <p class="text-lg font-bold text-green-700">$8.99</p>
-                        </div>
-                        <p class="mt-1 text-sm text-gray-500">Bolsa de 900g</p>
-                        <div class="mt-4 flex items-center">
-                            <div class="flex items-center">
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="far fa-star text-yellow-400"></i>
-                                <span class="text-gray-500 text-xs ml-1">(24)</span>
-                            </div>
-                        </div>
-                        <button onclick="addToCart('Harina de Almendras', 8.99, 'https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')" class="btn-hover mt-4 w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-md transition-colors">
-                            Añadir al Carrito
-                        </button>
-                    </div>
-                </div>
+            <div id="product-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Products will be dynamically inserted here -->
             </div>
         </div>
     </div>
@@ -733,7 +642,62 @@
             </div>
         </div>
     </footer>
+   <script src="js.js"></script>
    <script>
+    function renderProducts() {
+        const productContainer = document.getElementById('product-container');
+        if (!productContainer) {
+            console.error("Product container not found");
+            return;
+        }
+
+        productContainer.innerHTML = ''; // Clear existing products
+
+        productos.forEach(producto => {
+            const productCard = document.createElement('div');
+            productCard.className = 'bg-white rounded-lg overflow-hidden shadow-sm product-card animate__animated animate__fadeIn';
+
+            const imageUrl = producto.imageUrl || 'https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80';
+
+            let variantsHTML = '';
+            if (producto.variantes && producto.variantes.length > 0) {
+                variantsHTML = `<p class="mt-1 text-sm text-gray-500">Variantes: ${producto.variantes.join(', ')}</p>`;
+            }
+
+            let ingredientsHTML = '';
+            if (producto.ingredientes && producto.ingredientes.length > 0) {
+                ingredientsHTML = `<p class="mt-1 text-sm text-gray-500">Ingredientes: ${producto.ingredientes.join(', ')}</p>`;
+            }
+
+            // Escape single quotes in product name for onclick handler
+            const safeProductName = producto.nombre.replace(/'/g, "\\'");
+
+            productCard.innerHTML = `
+                <div class="relative pb-2/3 h-48 bg-gray-100">
+                    <img src="${imageUrl}" alt="${producto.nombre}" class="absolute h-full w-full object-cover">
+                </div>
+                <div class="p-4 flex flex-col flex-grow">
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-lg font-medium text-gray-900">${producto.nombre}</h3>
+                            <p class="text-lg font-bold text-green-700">$${producto.precio}</p>
+                        </div>
+                        <p class="mt-1 text-sm text-gray-500">${producto.descripcion}</p>
+                        <p class="mt-1 text-sm text-gray-500">${producto.peso ? `Peso: ${producto.peso}` : ''}</p>
+                        ${variantsHTML}
+                        ${ingredientsHTML}
+                    </div>
+                    <div class="mt-auto pt-4">
+                        <button onclick="addToCart('${safeProductName}', ${producto.precio}, '${imageUrl}')" class="btn-hover w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-md transition-colors">
+                            Añadir al Carrito
+                        </button>
+                    </div>
+                </div>
+            `;
+            productContainer.appendChild(productCard);
+        });
+    }
+
     // Cart functionality
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     
@@ -749,6 +713,7 @@
     
     // Initialize cart when page loads
     document.addEventListener('DOMContentLoaded', function() {
+        renderProducts();
         updateCart();
         setupCartToggle();
         animateOnScroll(); // Run once on load
